@@ -15,21 +15,19 @@ I built it fast using GitHub Copilot and Codespaces to streamline my workflow—
 - **AI Boost**: GitHub Copilot suggested 30% of the code—lines like [example snippet, e.g., `transferToken()`]—saving me hours.
 - **Setup**: Spun up a Codespace with a custom dev container (see `.devcontainer/devcontainer.json`) to keep it portable and reproducible.
 
-### Dev Container Config
-Here’s how I set up my environment:
-```json
+
 {
   "name": "WorldpayDeFi Dev Env",
+  "image": "mcr.microsoft.com/devcontainers/base:0-ubuntu-20.04",
   "customizations": {
     "vscode": {
-      "extensions": ["GitHub.copilot"]
+      "extensions": [
+        "GitHub.copilot",
+        "rust-lang.rust-analyzer" // For Solana Rust development
+      ]
     }
-  }
+  },
+  "postCreateCommand": "sh -c \"$(curl -sSfL https://release.solana.com/stable/install)\" && rustup default stable",
+  "forwardPorts": [8899], // Solana local validator default port
+  "remoteUser": "vscode"
 }
-Starts a Codespace with Copilot pre-installed—ready to code in 2 minutes flat.
-See It In Action
-Code: Dive into payment_contract.[coming soon]
-Commits: Check my history—[e.g., “Added fee optimizer, 3/13/25”] shows I’m active.
-Next Steps: Adding retailer UI and testing on [coming soon]
-Why It Matters
-This is my take on fixing payments with DeFi—cheaper, faster, and decentralized. Perfect fit for [Solana foundation]
